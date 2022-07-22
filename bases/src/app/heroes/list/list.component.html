@@ -1,0 +1,29 @@
+<h1>Avengers List!</h1>
+
+<ul>
+    <!-- Iteraring with Angular for loop instruction-->
+    <li *ngFor="let avenger of avengers; let i = index">
+        {{ i+1 }} - {{ avenger }}
+    </li>
+</ul>
+
+<!-- We want to render this html element when there is a deleted Avenger -->
+<!-- 
+    <h2 *ngIf="deleteAvenger">Deleted Avenger: {{ deleteAvenger }}</h2> 
+    <h2 *ngIf="!deleteAvenger">Nobody was deleted</h2>
+-->
+
+<!-- if else case -->
+<!-- In this case we use a local reference (#localReference only exists in html template's side) to define an else action-->
+<h3 
+    *ngIf="deleteAvenger else notDeleted" 
+    >
+    Deleted Avenger: {{ deleteAvenger }}
+</h3> 
+
+<ng-template #notDeleted>
+    <h3>Nobody was deleted!</h3>
+</ng-template>
+
+<!-- delete button -->
+<button (click)="deleteHeroes()"> Delete Heroes </button>
