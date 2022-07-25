@@ -1,0 +1,25 @@
+<h3>Add: <small>{{ childDefaultCharacter.name }}</small></h3>
+<hr>
+<!-- we use an Angular module to this form - ngSubmit - -->
+<form (ngSubmit)="addCharacter()">
+    <input 
+        type="text" 
+        placeholder="Name" 
+
+        name="name"
+        [(ngModel)]="childDefaultCharacter.name"
+        
+    />
+    <!-- 
+        [value]="newCharacter.name" //listen to the event
+        (input)="changeName($event)" // emit the event
+        -->
+    <input 
+        type="number" 
+        placeholder="Power Level" 
+
+        name="power"
+        [(ngModel)]="childDefaultCharacter.power"
+    />
+    <button type="submit">Add </button>
+</form>

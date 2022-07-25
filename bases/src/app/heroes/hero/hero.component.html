@@ -1,0 +1,23 @@
+<h1>{{ heroName }}</h1>
+
+<!-- Description List element -->
+<dl>
+    <!-- Description List element <dt> -->
+    <dt>Name: </dt>
+    <!-- descriptions <dd> -->
+    <dd> {{ heroName }} </dd>
+
+    <dt>Age: </dt>
+    <dd> {{ age }} </dd>
+
+    <dt>Method: </dt>
+    <dd> {{ method() }} </dd>
+
+    <dt>Capitalized: </dt>
+    <!-- <dd> {{ heroName.toUpperCase() }} </dd> -->
+    <!-- We can use getters and setters instead -->
+    <dd> {{ capitalizedName }} </dd>
+</dl>
+
+<button (click)="changeName()" > Change Hero's Name </button>
+<button (click)="changeAge()" > Change Hero's Age </button>
