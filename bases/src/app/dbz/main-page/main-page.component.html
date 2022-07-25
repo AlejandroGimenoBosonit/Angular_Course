@@ -1,0 +1,27 @@
+<p>Dragon Ball Z</p>
+<hr> 
+
+<div class="row">
+    <div class="col">
+        <!-- characters module -->
+        <!-- 
+            We want to associate our characters array with 
+            an input crated in the child module 
+            named childCharacters
+
+            [child_component_variable]="parent_component_variable"
+        -->
+        <!-- <app-characters 
+            [childCharacters]="characters"
+        ></app-characters> -->
+        <app-characters></app-characters>
+    </div>
+    <div class="col">
+        <!-- Add character Module -->
+        <!-- <app-add-character 
+            [childDefaultCharacter]="defaultChar"
+            (outNewChar)="addNewCharacter( $event )"
+        ></app-add-character> -->
+        <app-add-character [childDefaultCharacter]="defaultChar"></app-add-character>
+    </div>
+</div> 

@@ -305,24 +305,424 @@ In the last code line, we can see how we've declared an button click event calli
 
 
 
+# Angualr Bases II: WorkFlow
+In this section we're going to study how Angular works with a proper and simple structure using a form to store and render a character's list.
+
+
+## 1. Modules
+First of all we need a module to connect this component with the rest of our app. For this we're going to create or generate our module:
+```
+ng generate module dbzModule
+```
+Or
+```
+ng g m dbzModule
+```
+
+When we're created our module we will define:
+- Declarations: components inside our globalcomponent that we want to use inside it
+- Imports: angular components that our component will use
+- providers: angular services that our component requires.
+
+At the end our **dbz.module.ts** will have like this example:
+```
+import { NgModule } from '@angular/core';
+
+//Usually we are going to work with ngFor, ngIf , etc
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+
+// Components
+import { MainPageComponent } from './main-page/main-page.component';
+import { CharactersComponent } from './characters/characters.component';
+import { AddCharacterComponent } from './add-character/add-character.component';
+
+// Services
+import { DbzService } from './services/dbz.service';
 
 
 
 
+@NgModule({
+  declarations: [
+    MainPageComponent,
+    CharactersComponent,
+    AddCharacterComponent
+  ],
+  imports: [
+    CommonModule,
+    FormsModule
+  ],
+  exports:[
+    MainPageComponent,
+    FormsModule
+  ],
+  providers:[
+    DbzService
+  ]
+})
+export class DbzModule { }
+
+```
+
+## 2. Services
+A good practice for our project is define the component's logic into the same service to keep clean our code.
+To generate a service we can do it manually or we can generate it with the following command:
+```
+ng generate service dbz
+```
+Or
+```
+ng g s dbz
+```
+A Service's code will look like this example: 
+
+```
+/*
+Components shouldn't fetch or save 
+data directly and they certainly shouldn't 
+knowingly present fake data. They should focus
+on presenting data and delegate data access to a service.
+*/
+
+import { Injectable } from "@angular/core";
+
+// Typescript interfaces
+import { Character } from "../interfaces/dbz.interface";
+
+@Injectable()
+
+export class DbzService {
+    // we declare a characters array to store them
+    // declared as private to protect this array
+    private _characters: Character[] = [
+        {
+            name: 'Goku',
+            power: 20000
+        },
+        {
+            name: 'Vegeta',
+            power: 19000
+        }
+    ]; 
+    
+    get characters(): Character[]{
+        // break the reference to protect our data 
+        return [...this._characters];
+    }
+
+    constructor(){
+        console.log("Service Initialized");
+    }
+
+    // methods
+    addCharacter(characterToAdd: Character){
+        // we want to edit our private data
+        this._characters.push(characterToAdd);
+    }
+}
+```
+## 3. Components
+At this point we are going to deal with the different parts of our component. In this case we want to crate a pair of columns. The first one will render in a list the content of a character's array, and the second one will be a simple form to introduce our data. We can call these two component inside a third one as main component. With this structure we've:
+
+- **main-page**
+- **characters**
+- **add-character**
 
 
+### 3.1 main-page
+
+- **main-page/main-page.component.html**
+
+    A simple html template to render our components
+    ```
+    <p>Dragon Ball Z</p>
+    <hr> 
+
+    <div class="row">
+        <div class="col">
+            <!-- characters module -->        
+            <app-characters></app-characters>
+        </div>
+        <div class="col">
+            <app-add-character></app-add-character>
+        </div>
+    </div> 
+    ```
+
+- **main-page/main-page.component.ts**
+    We need to understand that our typescript component will declare a single component value and a service injection in the class constructor to use all the logic that our component requires.
+
+    ```
+    import { Component, OnInit } from '@angular/core';
+
+    // typescript interface
+    import { Character } from '../interfaces/dbz.interface';
+    import { DbzService } from '../services/dbz.service';
+
+    @Component({
+    selector: 'app-main-page',
+    templateUrl: './main-page.component.html',
+    styleUrls: []
+    })
+    export class MainPageComponent implements OnInit {
+
+    ngOnInit(): void {
+    }
+
+    // default component value
+    defaultChar: Character = {
+        name: 'Mr. Satan',
+        power: 10
+    }
+
+    // constructor to crate a service instance
+    constructor(private dbzService: DbzService){ }// dependence insjection
+    }
+
+    ```
+
+### 3.2 characters
+
+- **characters/characters.component.html**
+
+    A simple html template to render our components
+    ```
+    <h3>Characters</h3>
+    <hr>
+    <ul>
+        <li *ngFor="let character of characters"> 
+            {{ character.name }} - {{ character.power | number}}
+        </li>
+        <!-- 
+            We can use pipes to transform strings, currency amounts, dates, and other data for display
+        -->
+    </ul>
+    ```
+
+- **characters/characters.component.ts**
+    In this case we want to access to thearrays data and render them in the html template. 
+
+    ```
+    import { Component, OnInit } from '@angular/core';
+
+    // typescript interface
+    import { Character } from '../interfaces/dbz.interface';
+    import { DbzService } from '../services/dbz.service';
+
+    @Component({
+    selector: 'app-main-page',
+    templateUrl: './main-page.component.html',
+    styleUrls: []
+    })
+    export class MainPageComponent implements OnInit {
+
+    ngOnInit(): void {
+    }
+
+    // default component value
+    defaultChar: Character = {
+        name: 'Mr. Satan',
+        power: 10
+    }
+
+    // constructor to crate a service instance
+    constructor(private dbzService: DbzService){ }// dependence insjection
+    }
+
+    ```
+
+### 3.3 add-character - ngModel
+
+- **add-character/add-character.component.html**
+
+    A simple html  form to introduce our data
+    ```
+    <h3>Add: <small>{{ childDefaultCharacter.name }}</small></h3>
+    <hr>
+    <!-- we use an Angular module to this form - ngSubmit - -->
+    <form (ngSubmit)="addCharacter()">
+        <input 
+            type="text" 
+            placeholder="Name" 
+
+            name="name"
+            [(ngModel)]="childDefaultCharacter.name"
+            
+        />
+        <input 
+            type="number" 
+            placeholder="Power Level" 
+
+            name="power"
+            [(ngModel)]="childDefaultCharacter.power"
+        />
+        <button type="submit">Add </button>
+    </form>
+    ```
+**NOTE:** We've declared an order in our second input to listen[] and emit() an event, In this case we emit our character's 'name' and  'power'.
+
+- **add-character/add-character.component.ts**
+
+    In this case we want to do a couple of things:
+
+    - Declare a variable as input with default data(we can let them empty)
+
+        ```
+        //object to deal with form information
+        @Input() childDefaultCharacter: Character = {
+            name: 'Yamcha',
+            power: 1
+        }
+        ```
+    - Declare the class constructor wit hte service injection
+
+        ```
+        //service injections
+        constructor(private dbzService:DbzService) {}
+        ```
+    - A mehtod to call our service method
+        ```
+        addCharacter(){
+        if(this.childDefaultCharacter.name.trim().length === 0) return; 
+        
+        // calling service method
+        this.dbzService.addCharacter(this.childDefaultCharacter);
+
+        // refresh input value
+        this.childDefaultCharacter = {name: '', power:0};
+        
+        }
+        ```
+
+    At the end we'll have a component like the following:
+
+    ```
+    import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
+    // typescript interface
+    import { Character } from '../interfaces/dbz.interface';
+    import { DbzService } from '../services/dbz.service';
+
+    @Component({
+    selector: 'app-add-character',
+    templateUrl: './add-character.component.html',
+    styleUrls: []
+    })
+    export class AddCharacterComponent implements OnInit {
+
+        ngOnInit(): void {
+        }
+
+        //object to deal with form information
+        @Input() childDefaultCharacter: Character = {
+            name: 'Yamcha',
+            power: 1
+        }
+
+        //service injections
+        constructor(private dbzService:DbzService) {}
+        
+        addCharacter(){
+            if(this.childDefaultCharacter.name.trim().length === 0) return; 
+            
+            // calling service method
+            this.dbzService.addCharacter(this.childDefaultCharacter);
+
+            // refresh input value
+            this.childDefaultCharacter = {name: '', power:0};
+            
+        }
+    }
+
+    ```
+## 4. @Input
+Decorator that marks a class field as an input property and supplies configuration metadata. The input property is bound to a DOM property in the template. During change detection, Angular automatically updates the data property with the DOM property's value.
+
+```
+@Input() childDefaultCharacter: Character = {
+    name: 'Yamcha',
+    power: 1
+}
+```
+It means that our @Input(), childDefaultCharacter is going to come from the parent component. In this case the parent component is 'main-page' and we could see that we passed to this component the 'defaultChar' object to the add-character.component 'childDefaultCharacter'.
+
+```
+<p>Dragon Ball Z</p>
+<hr> 
+
+<div class="row">
+    <div class="col">
+        ...
+    </div>
+    <div class="col">
+        <!-- Add character Module -->
+        <app-add-character 
+
+            [childDefaultCharacter]="defaultChar"
+
+        ></app-add-character>
+    </div>
+</div> 
+```
+
+## 5. @Output
+
+Decorator that marks a class field as an output property and supplies configuration metadata. The DOM property bound to the output property is automatically updated during change detection.
+
+We use it to emit an event in the component to add a character:
+
+- 1. add-character.component.html
+```
+<h3>Add: <small>{{ childDefaultCharacter.name }}</small></h3>
+<hr>
+<!-- we use an Angular module to this form - ngSubmit - -->
+<form (ngSubmit)="addCharacter()">
+    <input 
+        type="text" 
+        placeholder="Name" 
+
+        [value]="newCharacter.name" //listen to the event
+        (input)="changeName($event)" // emit the event
+        
+    />
+    <input 
+        type="number" 
+        placeholder="Power Level" 
+
+        [value]="newCharacter.power" //listen to the event
+        (input)="changeName($event)" // emit the event
+    />
+    <button type="submit">Add </button>
+</form>
+```
+- 2. add-character.component.ts
+```
+//object to deal with form information
+@Input() childDefaultCharacter: Character = {
+    name: '',
+    power: 0
+}
+
+// emit event to send character info
+@Output() outNewChar: EventEmitter<Character>  = new EventEmitter<Character>();
 
 
+addCharacter(){
+// To avoid Angular to refresh every time we press the button
+// event.preventDefault();
 
+if(this.childDefaultCharacter.name.trim().length === 0) return; 
 
+// emit the event listener
+this.outNewChar.emit(this.childDefaultCharacter);
 
+// refresh input value
+this.childDefaultCharacter = {name: '', power:0};
 
-
-
-
-
-
-
+}
+```
 
 
 
