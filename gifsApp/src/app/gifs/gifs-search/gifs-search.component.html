@@ -1,0 +1,17 @@
+<h5>Search: </h5>
+<input 
+    type="text" 
+    class="form-control" 
+    placeholder="Search gifs..."
+    (keyup.enter)="searchMethod()"
+    #inputData
+> 
+<!-- 
+    The angular vent keyup is an aternative to don't use a form's tag and ngModule 
+    toa single input.
+
+    This event is going to switch when the enter key is pressed
+
+    We craeated a local reference to send the data(value) from the html element 
+    Alternative: We can send as argument the $event and print event.target.value
+ -->
