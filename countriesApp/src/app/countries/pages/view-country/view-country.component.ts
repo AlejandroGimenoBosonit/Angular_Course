@@ -46,7 +46,7 @@ export class ViewCountryComponent implements OnInit {
       a new observable ( country data from service search method )
       and switch them to operate with the new one
       */
-      switchMap( ({ countryId }) => this.countryService.getCountryByCode( countryId ) ),
+      switchMap( ({ countryId }) => this.countryService.searchCountryByCode( countryId ) ),
       // we take the switchMap result and tap will print by console
       tap(console.log)
       )

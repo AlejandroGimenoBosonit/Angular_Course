@@ -1,19 +1,22 @@
-<h3>By Country</h3>
-<hr>
+<div class="animate__animated animate__fadeIn animate__faster">
+    <h3>By Country</h3>
+    <hr>
 
-<div class="row">
-    <div class="col">
-        <!-- Input Component -->
-        <app-country-input
-            (onEnter)="searchCountry( $event )"
-            (onDebounce)="makeSuggestions( $event )"
-            placeholder="Search by Country"
-        ></app-country-input>
-        <!-- --------------- -->
+    <div class="row">
+        <div class="col">
+            <!-- Input Component -->
+            <app-country-input
+                (onEnter)="searchCountry( $event )"
+                (onDebounce)="makeSuggestions( $event )"
+                placeholder="Search by Country"
+            ></app-country-input>
+            <!-- --------------- -->
+        </div>
     </div>
+
+    <hr>
 </div>
 
-<hr>
 
 <!-- Alert banner only visible when there is an error -->
 <div

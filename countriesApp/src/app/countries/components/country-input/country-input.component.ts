@@ -32,10 +32,10 @@ export class CountryInputComponent implements OnInit {
     this.debouncer
     .pipe(
       // time in ms to emit the next value
-      debounceTime( 30 )
+      debounceTime( 300 )
     )
     .subscribe( value =>{
-      // console.log('debouncer: ', value);
+      console.log('debouncer: ', value);
       this.onDebounce.emit( value );
     })
   }
