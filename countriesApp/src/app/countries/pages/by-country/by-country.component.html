@@ -1,1 +1,41 @@
-<p>by-country works!</p>
+<h3>By Country</h3>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <!-- Input Component -->
+        <app-country-input
+            (onEnter)="searchCountry( $event )"
+            (onDebounce)="makeSuggestions( $event )"
+            placeholder="Search by Country"
+        ></app-country-input>
+        <!-- --------------- -->
+    </div>
+</div>
+
+<hr>
+
+<!-- Alert banner only visible when there is an error -->
+<div
+    *ngIf="isError"
+    class="alert alert-danger">
+    Country not found with {{ term }}
+</div>
+<!-- ------------------------------------------------ -->
+
+
+<!-- Country table -->
+<div
+    *ngIf="countries.length > 0"
+    class="row">
+    <div class="col">
+
+        <!-- Table component -->
+        <app-country-table
+            [inputCountries]="countries"
+        ></app-country-table>
+        <!-- --------------- -->
+    
+    </div>
+</div>
+<!-- ------------- -->

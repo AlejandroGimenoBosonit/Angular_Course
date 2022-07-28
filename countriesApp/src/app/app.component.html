@@ -1,22 +1,15 @@
 <div class="row container mt-4">
 
-  <!-- searches -->
   <div class="col-3">
-    <h2>Searches</h2>
-    <hr>
-    <ul class="list-group">
-      <li class="list-group-item">Search Country</li>
-      <li class="list-group-item">By Region</li>
-      <li class="list-group-item">By Capital</li>
-    </ul>
+    <!-- Sidebar Component -->
+    <app-sidebar></app-sidebar>
+    <!-- ----------------- -->
   </div>
-  <!-- End searches -->
 
-  <!-- By Region -->
+  <!-- Dynamic Section -->
   <div class="col">
-    <h2>By Region</h2>
-    <hr>
-    <app-by-region></app-by-region>
+    <!-- Component from routerModule -->
+    <router-outlet></router-outlet>
   </div>
-  <!-- End By Region -->
+  <!-- End Dynamic Section -->
 </div>
