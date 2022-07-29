@@ -1,9 +1,15 @@
-<h1>Hello World</h1>
+<div class="row container mt-4">
 
-<!-- modules -->
-<app-sidebar></app-sidebar>
+  <div class="col-3">
+    <!-- Sidebar Component -->
+    <app-sidebar></app-sidebar>
+    <!-- ----------------- -->
+  </div>
 
-<app-by-capital></app-by-capital>
-<app-by-country></app-by-country>
-<app-by-region></app-by-region>
-<app-view-country></app-view-country>
+  <!-- Dynamic Section -->
+  <div class="col">
+    <!-- Component from routerModule -->
+    <router-outlet></router-outlet>
+  </div>
+  <!-- End Dynamic Section -->
+</div>
