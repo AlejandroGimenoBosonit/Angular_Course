@@ -14,7 +14,34 @@
         </div>
     </div>
 
+    <!-- Suggestions html block -->
+    <ul 
+    *ngIf="displaySuggestions"
+    class="list-group">
+
+        <li *ngFor="let country of suggestedCountries"  
+        class="list-group-item list-group-item-action">
+
+            <a 
+            class="nav-link"
+            [routerLink]="['/country', country.alpha2Code]"
+            > 
+                {{ country.name }} 
+            </a>
+
+        </li>
+
+        <li class="list-group-item list-group-item-action"
+            (click)="searchSuggested( term )">
+            <a class="nav-link"> 
+                Search "{{ term }}" 
+            </a>
+        </li>
+    </ul>
+    <!-- ---------------------- -->
+
     <hr>
+
 </div>
 
 

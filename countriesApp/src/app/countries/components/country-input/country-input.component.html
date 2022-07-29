@@ -5,9 +5,12 @@
         type="text" 
         name="term"
         class="form-control"
+        
         placeholder="Search country..."
-        [(ngModel)]="term"
-        (input)="pressKey()"
         [placeholder]="placeholder"
+
+        [(ngModel)]="term"
+        
+        (input)="pressKey()"
     />
 </form>
