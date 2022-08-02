@@ -1,0 +1,77 @@
+<div class="text-layout">
+    <h1>DecimalPipe & percentage</h1>
+    <p>
+        Included Pipes in Angular - In Common Module Usually
+    </p>
+</div>
+
+<div class="grid">
+    <div class="col-4">
+        <p-card
+            header="Net Sales"
+            subheader="Present Year"
+        > 
+            <ul>
+                <!-- <li>
+                    <i class="pi pi-dollar" ></i>
+                    {{ netSales }}
+                </li> -->
+                <!-- PrimeNg Icon -->
+                <!-- <li>
+                    <i class="pi pi-dollar" ></i>
+                    {{ netSales | number }}
+                </li> -->
+                <!-- Smae number with entire part and 2 decimals -->
+                <li>
+                    <i class="pi pi-dollar" ></i>
+                    {{ netSales | number:'1.2-2' }}
+                </li>
+                <!-- From 2 to 4 decimals -->
+                <!-- <li>
+                    <i class="pi pi-dollar"></i>
+                    {{ netSales | number:'1.2-4' }}
+                </li> -->
+            </ul>
+        </p-card>
+    </div>
+    <div class="col-4">
+        <p-card
+            header="Gross Sales"
+            subheader="Present Year"
+        > 
+            <ul>
+                <!-- <li>
+                    <i class="pi pi-dollar" ></i>
+                    {{ netSales }}
+                </li> -->
+                <!-- PrimeNg Icon -->
+                <!-- <li>
+                    <i class="pi pi-dollar" ></i>
+                    {{ netSales | number }}
+                </li> -->
+                <!-- Smae number with entire part and 2 decimals -->
+                <li>
+                    <!-- <i class="pi pi-dollar" ></i> -->
+                    {{ netSales | currency }}
+                </li>
+                <!-- Canadian dollars but with dollar symbol ad with 4 decimals-->
+                <li>
+                    {{ netSales | currency : 'CAD' : 'symbol-narrow' : '1.0-4' }}
+                </li>
+            </ul>
+        </p-card>
+    </div>
+    <!-- Percentage -->
+    <div class="col-4">
+        <p-card
+            header="Percentage"
+            subheader="Present Year"
+        > 
+            <ul>
+                <li> {{ percentage }} </li>
+                <li> {{ percentage | percent }} </li>
+                <li> {{ percentage | percent:'2.2-2' }} </li>
+            </ul>
+        </p-card>
+    </div>
+</div>

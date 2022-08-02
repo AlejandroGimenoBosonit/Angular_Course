@@ -1,0 +1,92 @@
+<div class="text-layout">
+    <h1>Basic Pipes</h1>
+    <p>
+        Included Pipes in Angular - In Common Module Usually
+    </p>
+</div>
+
+<!-- PrimeNg PrimeFlex Grid max. size 12 -->
+<div class="grid">
+    <div class="col-4">
+        <p-card 
+            header = "Uppercase"
+            [subheader]="exampleText | uppercase"
+            >
+            {{ exampleText | uppercase }}
+        </p-card>
+    </div>
+    <div class="col-4">
+        <p-card 
+            header = "Lowercase"
+            [subheader]="exampleText | lowercase"
+            >
+            {{ exampleText | lowercase }}
+        </p-card>
+    </div>
+    <div class="col-4">
+        <p-card 
+            header = "TitleCase"
+            [subheader]="exampleText | titlecase"
+            >
+            {{ exampleText }}
+        </p-card>
+    </div>
+</div>
+
+<div class="text-layout">
+    <h1>Date | Datetime | Pipe</h1>
+    <p>
+        Pipe to display dates.
+    </p>
+</div>
+
+<div class="grid">
+    <div class="col-6">
+        <p-card>
+            <ul>
+                <li>date</li>
+                <li>date | date</li>
+                <li>date | date: 'short'</li>
+                <!-- GMT+2 ( SPAIN ) -->
+                <li>date | date: 'long'</li>
+                <li>date | date: 'MMMM'</li>
+                <li>date | date: 'MMMM, dd, yyyy'</li>
+                <li>date | date: 'shortDate'</li>
+                <li>date | date: 'mediumDate'</li>
+                <li>date | date: 'longDate'</li>
+            </ul>
+            <hr>
+            <ul>
+                <li> date | date: 'long': 'GMT+1' </li>
+                <li> date | date: 'long': 'GMT' </li>
+                <li> date | date: 'long': '': 'fr' </li>
+                <li> date | date: 'long': '': 'ja' </li>
+                <li> {{ date | date: 'long': 'GMT': 'fr' </li>
+            </ul>
+        </p-card>
+    </div>
+    <div class="col-6">
+        <p-card>
+            <ul>
+                <li> {{ date }} </li>
+                <li> {{ date | date }} </li>
+                <li> {{ date | date:'short' }} </li>
+                <li> {{ date | date: 'long' }} </li>
+                <li> {{ date | date: 'MMMM' }} </li>
+                <li> {{ date | date: 'MMMM, dd, yyyy' }} </li>
+                <li> {{ date | date: 'shortDate' }} </li>
+                <li> {{ date | date: 'mediumDate' }} </li>
+                <li> {{ date | date: 'longDate' }} </li>
+            </ul>
+
+            <hr>
+            <ul>
+                <li> {{ date | date: 'long': 'GMT+1' }} </li>
+                <li> {{ date | date: 'long': 'GMT' }} </li>
+                <li> {{ date | date: 'long': '': 'fr' }} </li>
+                <li> {{ date | date: 'long': '': 'ja' }} </li>
+                <li> {{ date | date: 'long': 'GMT': 'fr' }} </li>
+            </ul>
+        </p-card>
+    </div>
+</div>
