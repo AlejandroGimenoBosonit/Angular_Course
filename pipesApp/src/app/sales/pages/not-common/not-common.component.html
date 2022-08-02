@@ -1,0 +1,93 @@
+<div class="text-layout">
+    <h1>Uncommon Pipes </h1>
+    <p>
+        Included Pipes in Angular - In Common Module Usually
+    </p>
+</div>
+
+<!-- Grid -->
+<div class="grid">
+    <!-- First section with only two elements -->
+    <div class="col-6 md:col-6">
+        <!-- 
+            FieldSet:
+            open-source framework with a rich set of native Angular UI 
+            components that are used for great styling and this framework is 
+            used to make responsive websites with very much ease.
+        -->
+        <p-fieldset 
+            legend="i18nSelect Pipe"
+            [toggleable]="true"
+            >
+            <p>
+                {{ genre | i18nSelect: genreMapping }} username is ' {{ genre | i18nSelect: nameMapping }} '
+            </p>
+
+            <button 
+                pButton 
+                class="p-button-help"
+                type="button" 
+                label="Change genre"
+                (click)="changeGenre()" 
+            ></button>
+        </p-fieldset>
+    </div>
+
+    <div class="col-6 md:col-6">
+        <p-fieldset 
+            legend="i18nPlural Pipe"
+            [toggleable]="true"
+            >
+            <p>
+                {{ messages.length | i18nPlural: messageMapping }}
+            </p>
+            <button 
+                pButton 
+                class="p-button-help"
+                type="button" 
+                label="Delete message" 
+                (click)="deleteMessage()"
+            ></button>
+        </p-fieldset>
+    </div>
+    <!-- ------------------------------------ -->
+
+    <!-- Second section with only two elements -->
+    <div class="col-6 md:col-6">
+        <p-fieldset legend="Slice Pipe" [toggleable]="true" >
+            <b> Original </b>
+            <pre> {{ messages }} </pre>
+
+            <b> Slice:0:2 </b>
+            <pre> {{ messages | slice:1:3 }} </pre>
+        </p-fieldset>
+    </div>
+    <div class="col-6 md:col-6">
+        <p-fieldset legend="KeyValue Pipe" [toggleable]="true">
+            <ul>
+                <li *ngFor="let item of personObject | keyvalue" >
+                    <b> {{ item.key }}:</b> {{ item.value }}
+                </li>
+            </ul>
+        </p-fieldset>
+    </div>
+    <!-- ------------------------------------- -->
+    <!-- Third section with only two elements -->
+    <div class="col-6 md:col-6">
+        <p-fieldset legend="Json Pipe" [toggleable]="true" >
+            <pre> {{ heroes | json }} </pre>
+        </p-fieldset>
+    </div>
+    <div class="col-6 md:col-6">
+        <p-fieldset legend="Async Pipe" [toggleable]="true" >
+            <!-- Async Pipe subscribes to the Observable(or promise) internally and prints the result -->
+            <!-- <pre> {{ myObservable | async }} </pre> -->
+
+            <!-- Display message until promise don't resolves -->
+            <pre *ngIf="!(promiseValue | async)" > Loading </pre>
+            <!-- Print promise value -->
+            <pre> {{ promiseValue | async }} </pre>
+        </p-fieldset>
+    </div>
+    <!-- ------------------------------------- -->
+</div>
