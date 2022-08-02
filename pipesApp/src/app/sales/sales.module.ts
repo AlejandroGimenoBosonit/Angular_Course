@@ -6,6 +6,11 @@ import { BasicsComponent } from './pages/basics/basics.component';
 import { SortComponent } from './pages/sort/sort.component';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 
+// custom Pipe
+import { UppercasePipe } from './pages/pipes/uppercase.pipe';
+import { FlyPipe } from './pages/pipes/fly.pipe';
+import { SortPipe } from './pages/pipes/sort.pipe';
+
 
 
 @NgModule({
@@ -13,7 +18,10 @@ import { PrimeNgModule } from '../prime-ng/prime-ng.module';
     NumbersComponent,
     NotCommonComponent,
     BasicsComponent,
-    SortComponent
+    SortComponent,
+    UppercasePipe,
+    FlyPipe,
+    SortPipe
   ],
   imports: [
     CommonModule,
