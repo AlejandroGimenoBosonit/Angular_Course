@@ -1,0 +1,24 @@
+<h1>Are you sure?</h1>
+<hr>
+<p>
+    You're going to delete <strong>{{ data.superhero }}</strong> of the DDBB. You won't be able to acces to it anymore.
+    <br>
+    Do you want to continue?
+</p>
+
+<div fxLayout="row">
+    <button mat-raised-button 
+            (click)="delete()" 
+            color="warn">
+        Yes, delete it!
+    </button>
+    
+    <span class="spacer"></span>
+
+    <!-- mat-dialog-close -->
+    <button mat-raised-button 
+            (click)="close()" 
+            color="primary">
+        Close
+    </button>
+</div>

@@ -15,9 +15,7 @@ import { ListComponent } from './pages/list/list.component';
 import { CardHeroComponentComponent } from './components/card-hero-component/card-hero-component.component';
 import { ImagePipe } from './pipes/image.pipe';
 import { FormsModule } from '@angular/forms';
-
-
-
+import { ConfirmComponent } from './components/confirm/confirm.component';
 
 
 @NgModule({
@@ -28,9 +26,8 @@ import { FormsModule } from '@angular/forms';
     HomeComponent,
     ListComponent,
     CardHeroComponentComponent,
-
-    
-    ImagePipe
+    ConfirmComponent,
+    ImagePipe,
   ],
   imports: [
     CommonModule,

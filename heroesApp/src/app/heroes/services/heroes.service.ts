@@ -26,4 +26,16 @@ export class HeroesService {
   getSuggestions(query: string): Observable<Heroes[]> {
     return this.httpClient.get<Heroes[]>(`${this.apiEndPoint}/heroes?q=${query}&_limit=6`)
   }
+
+  postHero( hero: Heroes ):Observable<Heroes> {
+    return this.httpClient.post<Heroes>(`${this.apiEndPoint}/heroes`, hero);
+  }
+
+  updateHero( hero: Heroes ): Observable<Heroes> {
+    return this.httpClient.put<Heroes>(`${this.apiEndPoint}/heroes/${hero.id}`, hero);
+  }
+
+  deleteHero (id: string): Observable<any> {
+    return this.httpClient.delete<any>(`${this.apiEndPoint}/heroes/${id}`);
+  }
 }
