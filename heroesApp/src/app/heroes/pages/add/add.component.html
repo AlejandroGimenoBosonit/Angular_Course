@@ -1,0 +1,121 @@
+<h1>
+    {{ (hero.id) ? 'Edit' : 'Add New' }} Hero
+</h1>
+<!-- Two sections in a single row wit ha gap of 40px-->
+<div 
+    fxLayout="row" 
+    fxLayout.xs="column"
+    fxLayoutGap="40px">
+    <!-- first div form with a column disposition and 50% of width -->
+    <div fxFlex="50" fxLayout="column">
+        <!-- Form column element with 100% of width -->
+        
+        <div 
+            fxLayout="row" 
+            fxLayout.xs="column"
+            fxLayoutGap="20px">
+            <mat-form-field 
+                fxFlex="100"
+                fxLayout.xs="column">
+                <!-- Material Label -->
+                <mat-label>Super Hero</mat-label>
+                <!-- Material Input -->
+                <input
+                    matInput
+                    required 
+                    [(ngModel)]="hero.superhero"
+                    type="text"> 
+            </mat-form-field>
+    
+            <mat-form-field fxFlex="100">
+                <!-- Material Label -->
+                <mat-label>Alter Ego</mat-label>
+                <!-- Material Input -->
+                <input
+                    matInput
+                    required
+                    [(ngModel)]="hero.alter_ego" 
+                    type="text">
+            </mat-form-field>
+        </div>
+
+        <mat-form-field>
+            <!-- Material Label -->
+            <mat-label>First Appearance</mat-label>
+            <!-- Material Input -->
+            <input
+                matInput
+                required
+                [(ngModel)]="hero.first_appearance" 
+                type="text">
+        </mat-form-field>
+
+        <mat-form-field>
+            <!-- Material Label -->
+            <mat-label>Characters</mat-label>
+            <!-- Material Input -->
+            <input
+                matInput
+                required
+                [(ngModel)]="hero.characters" 
+                type="text">
+        </mat-form-field>
+
+        <mat-form-field>
+            <!-- Material Label -->
+            <mat-label>Publisher</mat-label>
+            <!-- Material Select -->
+            <mat-select
+                    required
+                    [(ngModel)]="hero.publisher" >
+                <!-- Iterate object's array and assign id to value -->
+                <mat-option 
+                        *ngFor="let publisher of selectPublishers" 
+                        [value]="publisher.id">
+                    {{ publisher.desc }}
+                </mat-option>
+            </mat-select>
+
+        </mat-form-field>
+
+        <!-- Image Url -->
+        <mat-form-field>
+            <!-- Material Label -->
+            <mat-label>Image Url</mat-label>
+            <!-- Material Input -->
+            <input
+                matInput
+                required
+                [(ngModel)]="hero.alt_img" 
+                type="url">
+        </mat-form-field>
+
+        <br>
+
+        <div fxLayout>
+
+            <button mat-raised-button 
+                    color="primary"
+                    (click)="saveMethod()">
+                <mat-icon>edit</mat-icon>
+                {{ (hero.id) ? 'Update' : 'Save' }} 
+            </button>
+
+            <span class="spacer"></span>
+
+            <!-- Only appears when is edit mode -->
+            <button *ngIf="hero.id"
+                    mat-raised-button 
+                    color="warn"
+                    (click)="deleteMethod()">
+                <mat-icon>delete</mat-icon>
+                Delete
+            </button>
+        </div>
+    </div>
+
+    <!-- second div with the default image with 50% of width -->
+    <div fxLayoutAlign="center" fxFlex="50">
+        <img [src]="hero | image" alt="">
+    </div>
+</div>

@@ -1,0 +1,79 @@
+<!-- Material Sidenav -->
+<mat-sidenav-container fullscreen> 
+    <!-- local reference to toggle when press button -->
+    <mat-sidenav #sidenav mode="push">
+        <!-- Material Toolbar -->
+        <mat-toolbar color="primary">
+
+            <span>Menu</span>
+
+            <!-- Space beetween buttons -->
+            <span class="spacer"></span>
+            
+            <!-- Material Buttons -->
+            <button mat-icon-button
+                    (click)="sidenav.toggle()">
+                <!-- Material Icon -->
+                <mat-icon>
+                    <!-- Material Icon's Name -->
+                    menu
+                </mat-icon>
+            </button>
+        </mat-toolbar>
+
+        <!-- Material List -->
+        <mat-nav-list>
+            <!-- Routes to Heroes's -->
+            <a  mat-list-item 
+                routerLink="./list"
+                (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon >label</mat-icon>
+                <span>Hero List</span>
+            </a>
+
+            <a  mat-list-item 
+                routerLink="./add"
+                (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon >add</mat-icon>
+                <span>Add Hero</span>
+            </a>
+
+            <a  mat-list-item 
+                routerLink="./search"
+                (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon >search</mat-icon>
+                <span>Search Hero</span>
+            </a>
+            
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <!-- Material Toolbar -->
+    <mat-toolbar color="primary">
+        <!-- Material Buttons -->
+        <button mat-icon-button
+                (click)="sidenav.toggle()">
+            <!-- Material Icon -->
+            <mat-icon>
+                <!-- Material Icon's Name -->
+                menu
+            </mat-icon>
+        </button>
+
+        <!-- Space beetween buttons -->
+        <span class="spacer"></span>
+
+        <span>{{ auth.user }}</span>
+
+        <button mat-button
+                (click)="logout()">
+            Logout
+        </button>
+    </mat-toolbar>
+
+    <div class="container">
+        <!-- Route Content -->
+        <router-outlet></router-outlet>
+    </div>
+
+</mat-sidenav-container>

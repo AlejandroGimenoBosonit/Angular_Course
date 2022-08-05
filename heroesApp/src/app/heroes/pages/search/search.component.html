@@ -1,0 +1,50 @@
+<div fxLayout="column">
+    <div>
+        <h1>Hero Searcher</h1>
+        <mat-divider></mat-divider>
+    </div>
+    <div fxLayout="column">
+        <h3>Search</h3>
+        <mat-form-field class="example-full-width">
+            <!-- for ngModel import FormsModule -->
+            <input 
+                type="text"
+                placeholder="Enter Hero's name..."
+                aria-label="Number"
+                matInput
+                [matAutocomplete]="auto"
+                [(ngModel)]="searchQuery"
+                (input)="search()">
+            <mat-autocomplete 
+                autoActiveFirstOption 
+                #auto="matAutocomplete"
+                (optionSelected)="selectedOption( $event )">
+
+                <!-- success -->
+                <mat-option *ngFor="let hero of heroSuggestions" [value]="hero">
+                    {{ hero.superhero }}
+                </mat-option>
+
+                <!-- not found -->
+                <mat-option *ngIf="heroSuggestions.length===0 && searchQuery.length > 0" value="">
+                    Error loading values for {{ searchQuery }}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+    </div>
+
+    <!-- Print solution -->
+    <!-- <div>
+        <pre> {{ selectedHero | json }} </pre>
+    </div> -->
+    <!-- Print as card -->
+    <div 
+        fxFlex="20" 
+        fxLayout="row wrap"
+        fxLayoutAlign="center" 
+        class="card-container">
+
+        <app-card-hero-component *ngIf="selectedHero" [receivedHero]="selectedHero" ></app-card-hero-component>
+    </div>
+    
+</div>
