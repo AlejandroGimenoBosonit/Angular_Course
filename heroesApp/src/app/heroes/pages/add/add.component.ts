@@ -12,7 +12,7 @@ import { ConfirmComponent } from '../../components/confirm/confirm.component';
   templateUrl: './add.component.html',
   styles: [`
     img {
-      width: 100%;
+      width: 50%;
       border-radius: 5px;
     }
   `]

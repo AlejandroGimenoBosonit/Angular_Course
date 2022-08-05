@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
  import { RouterModule, Routes } from '@angular/router';
 import { ErrorPageComponent } from '../shared/error-page/error-page.component';
+import { AuthGuard } from '../auth/guards/auth.guard';
 
 // routes array
 const routes: Routes = [
@@ -13,7 +14,10 @@ const routes: Routes = [
   
   {
     path: 'heroes',
-    loadChildren: () => import('../heroes/heroes.module').then( module => module.HeroesModule )
+    loadChildren: () => import('../heroes/heroes.module').then( module => module.HeroesModule ),
+    // we want user could access ONLY if he/she is authenticated - protect with guard
+    canLoad: [ AuthGuard ],
+    canActivate: [AuthGuard]
   },
   {
     path: '404',

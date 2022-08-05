@@ -63,7 +63,10 @@
         <!-- Space beetween buttons -->
         <span class="spacer"></span>
 
-        <button mat-button>
+        <span>{{ auth.user }}</span>
+
+        <button mat-button
+                (click)="logout()">
             Logout
         </button>
     </mat-toolbar>

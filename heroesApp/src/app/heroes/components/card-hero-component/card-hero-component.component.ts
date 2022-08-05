@@ -7,7 +7,9 @@ import { Heroes } from '../../interfaces/heroes.interface';
   styles: [`
      mat-card{
       margin-top: 20px;
+      box-shadow: rgba(0, 0, 0, 0.24) 3px 5px 10px;
     }
+    
   `]
 })
 export class CardHeroComponentComponent implements OnInit {

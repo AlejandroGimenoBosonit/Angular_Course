@@ -9,10 +9,6 @@ import { Heroes } from '../interfaces/heroes.interface';
 export class ImagePipe implements PipeTransform {
 
   transform(hero: Heroes): string {
-
-    console.log('pipe invoqued');
-    
-
     if( !hero.id || hero.alt_img === "") {
       return `assets/no-image.png`;
     }else if(hero.alt_img){
