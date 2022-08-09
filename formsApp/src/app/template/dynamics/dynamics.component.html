@@ -40,13 +40,13 @@
                     placeholder="Add Favorite Game"
                     [(ngModel)]="newGame"
                     name="favoriteGame"
+                    (keyup.enter)="addGame()"
                     >
 
                 <button 
                     class="btn btn-outline-primary"
                     type="button"
                     (click)="addGame()"
-                    (keyup.enter)="addGame()"
                     >
                     Add
                 </button>
@@ -81,7 +81,7 @@
         <div class="col-sm-12 ">
             <button 
                 class="btn btn-primary float-end" 
-                type="submit" 
+                type="button" 
                 (click)="save()"
                 [disabled]="myForm.invalid"
                 >

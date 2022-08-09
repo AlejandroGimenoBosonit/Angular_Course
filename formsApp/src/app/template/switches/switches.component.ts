@@ -14,7 +14,7 @@ export class SwitchesComponent implements OnInit {
   };
 
   termsAndConditions: boolean = false;
-
+ 
   constructor() { }
 
   ngOnInit(): void {
