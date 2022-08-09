@@ -8,8 +8,11 @@ interface MenuItem {
 @Component({
   selector: 'app-side-menu',
   templateUrl: './side-menu.component.html',
-  styles: [
-  ]
+  styles: [`
+    li { 
+      cursor: pointer;
+    }
+  `]
 })
 export class SideMenuComponent implements OnInit {
 
