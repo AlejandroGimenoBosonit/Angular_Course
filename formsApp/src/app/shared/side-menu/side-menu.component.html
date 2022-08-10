@@ -1,0 +1,36 @@
+<h2>Template</h2>
+<hr>
+
+<ul class="list-group">
+    <li class="list-group-item"
+        *ngFor="let item of templateMenu"
+        [routerLink]="[item.route]">
+        {{ item.text }}
+    </li>
+</ul> 
+
+<br>
+
+<h2>Reactive</h2>
+<hr>
+
+<ul class="list-group">
+    <li class="list-group-item"
+        *ngFor="let item of reactiveMenu"
+        [routerLink]="[item.route]">
+        {{ item.text }}
+    </li>
+</ul>   
+
+<br>
+
+<h2>Authentication</h2>
+<hr>
+
+<ul class="list-group">
+    <li class="list-group-item"
+        *ngFor="let item of authMenu"
+        [routerLink]="[item.route]">
+        {{ item.text }}
+    </li>
+</ul>   

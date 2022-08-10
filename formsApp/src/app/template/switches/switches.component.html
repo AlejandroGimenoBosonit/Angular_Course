@@ -1,0 +1,111 @@
+<h2>Template: Switches</h2>
+
+<hr>
+
+<form #myForm="ngForm">
+    <!-- Radio -->
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Male or Female?</label>
+        <div class="col-sm-9">
+            <div class="form-check">
+                <input 
+                    class="form-check-input" 
+                    type="radio" 
+                    name="radioGenre" 
+                    value="M"
+                    [(ngModel)]="person.genre"
+                    id="maleRadio"
+                    required>
+                <label class="form-check-label" for="maleRadio">
+                  Male
+                </label>
+              </div>
+              <div class="form-check">
+                <input 
+                    class="form-check-input" 
+                    type="radio" name="radioGenre" 
+                    value="F"
+                    [(ngModel)]="person.genre"
+                    id="femaleRadio"
+                    required>
+                <label class="form-check-label" for="femaleRadio">
+                  Female
+                </label>
+              </div>
+        </div>
+    </div>
+
+
+    <!-- Switche -->
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Notifications</label>
+        <div class="col-sm-9">
+            <div class="form-check form-switch mt-2">
+                <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    role="switch" 
+                    id="flexSwitchCheckChecked"
+                    required
+                    
+                    name="notifications"
+                    [(ngModel)]="person.notifications"
+                    >
+                <label class="form-check-label" for="flexSwitchCheckChecked">I want to recieve notifications</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checks -->
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label"></label>
+        <div class="col-sm-9">
+            <div class="form-check">
+                <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    value="" 
+                    id="flexCheckDefault" 
+                    required
+                    
+                    name="terms"
+                    [(ngModel)]="termsAndConditions"
+                    >
+                <label class="form-check-label" for="flexCheckDefault">
+                  I accept the terms and conditions
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Submit button -->
+    <div class="row">
+        <div class="col">
+            <button 
+                class="btn btn-primary float-end" 
+                [disabled]="myForm.invalid"
+                (click)="save()"
+                >
+                Save
+            </button>
+        </div>
+    </div>
+</form>
+
+<h5>Form Value</h5>
+<pre> {{ myForm.value | json }} </pre>
+
+<br>
+
+<h5>Person Data (info to send by form)</h5>
+<pre> {{ person | json }} </pre>
+
+<br>
+
+<h5>Valid</h5>
+<pre> {{ myForm.valid }} </pre>
+
+<br>
+
+<h5>Conditions: </h5>
+<pre> {{ myForm?.controls?.['terms']?.errors | json}} </pre>
