@@ -55,6 +55,11 @@
                         type="text"
                         class="form-control"
                         placeholder="Username">
+                    <span
+                        *ngIf="validField('username')" 
+                        class="form-text text-danger">
+                        Username is required
+                    </span>
                 </div>
             </div>
 
