@@ -1,0 +1,84 @@
+<h1>Nested Selectors</h1>
+<hr>
+
+<!-- reactive form -->
+<form [formGroup]="myForm" (ngSubmit)="saveData()">
+
+    <div class="row mb-3">
+        <div class="col">
+            <label class="form-label">Continents</label>
+            
+            <!-- first selectos -->
+            <select
+                formControlName="region" 
+                class="form-control">
+                <option value="">-- Select a Continent --</option>
+                <!-- As many options as strings in _regions -->
+                <option
+                    *ngFor="let region of regions" 
+                    [value]="region | lowercase">{{ region }}</option>
+            </select>
+
+        </div>
+    </div>
+
+    <!-- Countries -->
+    <div class="row mb-3" *ngIf="countries.length !== 0">
+        <div class="col">
+            <label class="form-label">Country</label>
+            
+            <select
+                formControlName="country" 
+                class="form-control">
+                <option value="">-- Select a Country --</option>
+                <!-- As many options as strings in _regions -->
+                <option
+                    *ngFor="let country of countries" 
+                    [value]="country.alpha3Code | lowercase">{{ country.name }}</option>
+            </select>
+
+        </div>
+    </div>
+
+    <!-- Frontiers -->
+    <div class="row mb-3" *ngIf="frontiers.length > 0">
+        <div class="col">
+            <label class="form-label">Frontier</label>
+            
+            <select
+                formControlName="frontier" 
+                class="form-control">
+                <option value="">-- Select a Frontier --</option>
+                <!-- As many options as strings in _regions -->
+                <option
+                    *ngFor="let frontier of frontiers" 
+                    [value]="frontier.alpha3Code | lowercase">{{ frontier.name }}</option>
+            </select>
+
+        </div>
+    </div>
+
+    <div class="row" *ngIf="loading">
+        <div class="col">
+            <div class="alert alert-primary">
+                Loading...
+            </div>
+        </div>
+    </div>
+
+    <!-- button -->
+    <div class="row">
+        <div class="col">
+            <button
+                type="submit"
+                class="btn btn-primary float-end">
+                Save
+            </button>
+        </div>
+    </div>
+</form>
+
+<!-- Debugging -->
+<h3>Form</h3>
+<pre> {{ myForm.valid }} </pre>
+<pre> {{ myForm.value | json }} </pre>
