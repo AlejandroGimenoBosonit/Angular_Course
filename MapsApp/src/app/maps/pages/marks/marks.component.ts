@@ -1,6 +1,12 @@
 import { Component, ElementRef, AfterViewInit, ViewChild } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 
+interface markerColor {
+  color: string;
+  marker?: mapboxgl.Marker;
+  center?: [number, number]
+}
+
 @Component({
   selector: 'app-marks',
   templateUrl: './marks.component.html',
@@ -39,7 +45,9 @@ export class MarksComponent implements AfterViewInit {
 
   map!        : mapboxgl.Map;
   zoomLvl     : number = 15;
-  coordinates : [number, number] = [-0.40757115983516956, 39.4752606518945];
+  coordinates : [number, number] = [-0.40757115983516956, 39.4752606518945]; //lng, lat
+
+  markers: markerColor[] = [];
 
   constructor() { }
 
@@ -51,9 +59,11 @@ export class MarksComponent implements AfterViewInit {
       zoom: this.zoomLvl
     });
 
-    // marker
-    // const marker = new mapboxgl.Marker().setLngLat(this.coordinates).addTo(this.map);
+    // When map has been created read localstorage for markers
+    this.readLocalStorage();    
   }
+
+
 
   // methods
   addMarker() {
@@ -64,5 +74,94 @@ export class MarksComponent implements AfterViewInit {
       draggable: true,
       color
     }).setLngLat(this.coordinates).addTo(this.map);
+
+    // Add marker to markers array
+    this.markers.push( {color, marker} );
+
+    // When marker is created, store it in local storage
+    this.saveLocalStorage(); 
+
+    // when marker is created and storedin locasStorage we create a listener
+    // when marker ends to be dragged, update its coordinates
+    marker.on('dragend', () => this.saveLocalStorage());
+  }
+
+
+
+  // Update marker's center property 
+  goToMarker( marker: markerColor): void {
+    const { lng, lat } = marker['marker']!.getLngLat();
+
+    this.map.flyTo( {
+      center: { lng, lat } 
+    } )
+    // console.log(this.map.getCenter()['lng'], this.map.getCenter()['lat']);
+    // console.log(marker['marker']!.getLngLat());
+    
+    
+  }
+
+
+
+  // store markers in local storage
+  saveLocalStorage() {
+    
+    const lngLatArr: markerColor[] = [];
+    
+    this.markers.forEach( marker => {
+      const color = marker.color;
+      const { lng, lat } = marker.marker!.getLngLat();
+
+      lngLatArr.push({ color,  center: [lng, lat]}) 
+    });
+
+    // storage 
+    localStorage.setItem('markers', JSON.stringify(lngLatArr));
+  }
+
+  
+  // read markers from local storage
+  readLocalStorage() {
+    // check for markers in local storage
+    if( !localStorage.getItem('markers') ) return;
+
+    const lngLatArr: markerColor[] = JSON.parse( localStorage.getItem('markers')! );
+    
+    // create markers if there are stored in localstorage
+    lngLatArr.forEach( marker => {
+      
+      const newMarker = new mapboxgl.Marker({
+        draggable: true,
+        color: marker.color
+      })
+      .setLngLat( marker.center! )
+      .addTo(this.map);
+    
+
+      // update markers array
+      this.markers.push({
+        marker: newMarker,
+        color: marker.color
+      });
+
+
+      // when marker is created and storedin locasStorage we create a listener
+      // when marker ends to be dragged, update its coordinates
+      newMarker.on('dragend', () => this.saveLocalStorage());
+    });
+    
+  }
+
+
+  // delete marker
+  deleteMarker( index: number ) {
+    
+    // delete map marker from markers array
+    this.markers[index].marker?.remove();
+    // delete marker form local array
+    this.markers.splice(index, 1);
+    // update local storage
+    this.saveLocalStorage();
+
   }
 }
