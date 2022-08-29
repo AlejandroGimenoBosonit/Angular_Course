@@ -1,0 +1,35 @@
+
+<h2>Charts</h2>
+
+
+<div class="buttons-container">
+    <p-card>
+        <div class="flex flex-row flex-wrap justify-content-center">
+            <button class="flex align-items-center justify-content-center my-3" 
+                    pButton
+                    pRipple 
+                    label="Linear Chart"
+                    (click)="changeStatus('lienarSelector')"
+            ></button>
+            <button class="flex align-items-center justify-content-center my-3 mx-3" 
+                    pButton
+                    pRipple 
+                    label="Double Chart"
+                    (click)="changeStatus('doubleSelector')"
+            ></button>
+            <button class="flex align-items-center justify-content-center my-3" 
+                    pButton
+                    pRipple 
+                    label="Doughnut Chart"
+                    (click)="changeStatus('doughnutSelector')"
+                    ></button>
+        </div>
+    </p-card>
+</div>
+<div class="components-container mt-3">
+    <p-card>
+        <app-linear-chart class="m-8 p-8" *ngIf="lienarSelector"></app-linear-chart>
+        <app-double-linear-chart class="m-8 p-8" *ngIf="doubleSelector"></app-double-linear-chart>
+        <app-doughnut-chart class="m-8 p-8" *ngIf="doughnutSelector"></app-doughnut-chart>
+    </p-card>
+</div>
