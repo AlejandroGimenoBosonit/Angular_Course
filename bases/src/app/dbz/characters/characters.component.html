@@ -1,0 +1,10 @@
+<h3>Characters</h3>
+<hr>
+<ul>
+    <li *ngFor="let character of characters"> 
+        {{ character.name }} - {{ character.power | number}}
+    </li>
+    <!-- 
+        We can use pipes to transform strings, currency amounts, dates, and other data for display
+    -->
+</ul>

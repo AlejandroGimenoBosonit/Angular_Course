@@ -1,0 +1,95 @@
+<h2>Template: <small>Dynamics</small></h2>
+
+<hr>
+
+<form 
+    (ngSubmit)="save()" 
+    autocomplete="off"
+    #myForm="ngForm"
+    (submit)="takeInfo()"
+    >
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Name</label>
+        <div class="col-sm-9">
+            <div class="input-group">
+                <input 
+                class="form-control" 
+                placeholder="Person's name"
+                [ngModel]="person.name"
+                name="personName"
+                required
+                >
+            <span 
+                class="form-text text-danger"
+                *ngIf="validName()"
+            >
+                This field is required
+            </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+
+        <label class="col-sm-3 col-form-label">Add</label>
+        <div class="col-sm-9">
+            <div class="input-group">
+
+                <input 
+                    class="form-control" 
+                    placeholder="Add Favorite Game"
+                    [(ngModel)]="newGame"
+                    name="favoriteGame"
+                    (keyup.enter)="addGame()"
+                    >
+
+                <button 
+                    class="btn btn-outline-primary"
+                    type="button"
+                    (click)="addGame()"
+                    >
+                    Add
+                </button>
+    
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+
+        <label class="col-sm-3 col-form-label">Favorite</label>
+        <div class="col-sm-9">
+
+            <div class="input-group mb-1" 
+                *ngFor="let games of person.favorites; let i=index" >
+                <input
+                    [ngModel]="games.name"
+                    name="favorites_{{ i }}"
+                    class="form-control"
+                    required>
+                <button 
+                    (click)="delete( i )"
+                    class="btn btn-outline-danger">
+                    Delete
+                </button>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 ">
+            <button 
+                class="btn btn-primary float-end" 
+                type="button" 
+                (click)="save()"
+                [disabled]="myForm.invalid"
+                >
+                Save
+            </button>
+        </div>
+    </div>
+</form>
+
+<span>Person</span>
+<pre> {{ person | json }} </pre>

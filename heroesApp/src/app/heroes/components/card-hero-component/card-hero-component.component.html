@@ -1,0 +1,31 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title> {{ receivedHero.superhero | titlecase}} </mat-card-title>
+        <mat-card-subtitle> {{ receivedHero.alter_ego }} </mat-card-subtitle>
+    </mat-card-header>
+
+    <img mat-card-image [src]="receivedHero | image" alt="">
+    <!-- src="assets/heroes/{{ receivedHero.id }}.jpg" -->
+    <mat-card-content>
+        <h3> {{ receivedHero.publisher }} </h3>
+        <p>
+            <strong>First Appearance</strong>: {{ receivedHero.first_appearance }}
+        </p>
+    </mat-card-content>
+
+    <mat-card-actions>
+        <button 
+            mat-button 
+            color="warn" 
+            [routerLink]="['/heroes',receivedHero.id]">
+            Read more...
+        </button>
+
+        <button 
+            mat-button 
+            color="info"
+            [routerLink]="['/heroes/edit',receivedHero.id]">
+            Edit
+        </button>
+    </mat-card-actions>
+</mat-card>

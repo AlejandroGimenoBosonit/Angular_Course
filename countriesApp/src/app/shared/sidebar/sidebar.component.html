@@ -1,0 +1,31 @@
+<h2>Searches</h2>
+    <hr>
+    <ul class="list-group">
+      <!-- routerLink is an attribute from AppRoutingModule that access to routes path field -->
+      <!-- 
+        We need to specify because  our default route is a empty string and every route begins with that
+        [routerLinkActiveOptions]="{ exact: true }"
+       -->
+      <li
+        routerLink="" 
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="list-group-item"
+      >
+        Search Country
+      </li>
+      <li
+        routerLink="region" 
+        routerLinkActive="active"
+        class="list-group-item"
+      >
+        By Region</li> 
+
+      <li
+        routerLink="capital" 
+        routerLinkActive="active"
+        class="list-group-item"
+      >
+        By Capital</li
+        >
+    </ul>

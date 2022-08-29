@@ -1,0 +1,33 @@
+<!-- Declared a local reference to avoid interactions with another maps -->
+<div #map class="map-container "></div>
+
+<div class="row">
+    <div class="col-12">
+        <label class="form-label">
+            Zoom: {{ zoomLvl | number:'2.0-2'}}
+            -Lng , Lat: [{{ coordinates[0] | number:'2.0-4'}},{{ coordinates[1] | number:'2.0-4'}}]
+        </label>
+        <!-- Bootstrap Range element -->
+        <input 
+            type="range" 
+            class="form-range" 
+            [value]="zoomLvl"
+            min="0"
+            max="18"
+            #zoomInput
+            (input)="zoomChange( zoomInput.value )">
+        <!-- Buttons -->
+        <div class="col-12">
+            <button 
+                class="btn btn-primary"
+                (click)="zoomOut()">
+                -
+            </button>
+            <button 
+                class="btn btn-primary float-end"
+                (click)="zoomIn()">
+                +
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,87 @@
+<div class="text-layout">
+    <h1>Custom Pipes</h1>
+    <p>Pipes created by {{ 'ourselves'  | upperCase }} !</p>
+    <p>Example with {{ 'arguments' | upperCase: isUpper}}</p>
+
+</div>
+
+<!-- PrimeNg - Toolbar -->
+<p-toolbar>
+    <div class="p-toolbar-group-left"></div>
+    <div class="p-toolbar-right">
+        <button
+            pButton
+            label="Toggle Format"
+            class="mr-1 p-button-warning"
+            (click)="toggleText()"
+        ></button>
+        <button 
+            pButton
+            icon="pi pi-sort"
+            label="By Name"
+            class="mr-1"
+            (click)="changeSorting( 'name' )"
+        ></button>
+        <button 
+            pButton
+            icon="pi pi-sort"
+            label="Fly"
+            class="mr-1 p-button-success"
+            (click)="changeSorting( 'fly' )"
+        ></button>
+        <button 
+            pButton
+            icon="pi pi-sort"
+            label="By Color"
+            class="mr-1 p-button-help"
+            (click)="changeSorting( 'color' )"
+        ></button>
+
+    </div>
+</p-toolbar>
+<!-- ----------------- -->
+<!-- PrimeNg - Table -->
+<div class="p-grid">
+    <div class="p-col mt-2">
+        <p-table [value]="heroes | sort:sortBy" >
+            <ng-template pTemplate="header">
+                <tr>
+                    <th> Name </th>
+                    <th> Fly </th>
+                    <th> Color </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-hero>
+                <tr>
+                    <td> {{ hero.name }} </td>
+                    <td> {{ hero.fly | fly | titlecase}} </td>
+                    <td> {{ hero.color }} </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+<!-- --------------- -->
+<!-- PrimeNg - Sortable Table -->
+<div class="p-grid">
+    <div class="p-col mt-2">
+        <!-- To avoid mutate the upper table we'll send a array's copy -->
+        <p-table [value]="heroes | slice:0" >
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="name">Name <p-sortIcon field="name" ></p-sortIcon> </th>
+                    <th pSortableColumn="fly">Fly <p-sortIcon field="fly" ></p-sortIcon> </th>
+                    <th pSortableColumn="color">Color <p-sortIcon field="color" ></p-sortIcon> </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-hero>
+                <tr>
+                    <td> {{ hero.name }} </td>
+                    <td> {{ hero.fly | fly | titlecase}} </td>
+                    <td> {{ hero.color }} </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+<!-- --------------- -->

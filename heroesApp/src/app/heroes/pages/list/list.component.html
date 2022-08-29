@@ -1,0 +1,20 @@
+<h1>Heroes List</h1>
+
+<!-- Cards in Flex format -->
+<div 
+    fxLayout="row wrap"
+    fxLayout.xs="column"
+    fxLayoutAlign="center"
+    fxLayoutGap="20">
+    <!-- Specify Card's dimensions row's 20% -->
+    <div 
+        fxFlex="20"
+        fxFlex.lg="15"
+        fxFlex.sm="30"
+        *ngFor="let hero of heroes">
+
+        <!-- Heroes Material Cards Component  -->
+        <app-card-hero-component [receivedHero]="hero" ></app-card-hero-component>
+
+    </div>
+</div>

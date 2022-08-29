@@ -1,0 +1,41 @@
+<div class="animate__animated animate__fadeIn animate__faster">
+    <h3>By Capital</h3>
+    <hr>
+
+    <div class="row">
+        <div class="col">
+            <!-- Input Component -->
+            <app-country-input
+                (onEnter)="searchCountry( $event )"
+                placeholder="Search by Capital"
+            ></app-country-input>
+            <!-- --------------- -->
+        </div>
+    </div>
+</div>
+
+
+<!-- Alert banner only visible when there is an error -->
+<div
+    *ngIf="isError"
+    class="alert alert-danger">
+    Country not found with capital "{{ term }}"
+</div>
+<!-- ------------------------------------------------ -->
+
+
+<!-- Country table -->
+<div
+    *ngIf="countries.length > 0"
+    class="row">
+    <div class="col">
+
+        <!-- Table component -->
+        <app-country-table
+            [inputCountries]="countries"
+        ></app-country-table>
+        <!-- --------------- -->
+    
+    </div>
+</div>
+<!-- ------------- -->

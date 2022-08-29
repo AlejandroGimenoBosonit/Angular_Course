@@ -1,0 +1,117 @@
+<!-- Logic comes from HTML Template -->
+<h2>Template: Basics</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <!-- 
+            local reference to deal with info sending method called in our form
+            by the button
+         -->
+        <form
+            #myForm="ngForm" 
+            (submit)="takeInfo()">
+
+            <!-- Product Field -->
+            <!-- 
+                ngModel and name to take form's element
+             -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Product</label>
+                <div class="col-sm-9">
+                    <input 
+                        type="text"
+                        class="form-control"
+                        placeholder="Product Name"
+
+                        minlength="3"
+                        
+                        ngModel
+                        name="productName"
+                        
+                        required>
+                    <span 
+                        class="form-text text-danger"
+                        *ngIf="validName()"
+                        >
+                        Must be 3 words minimum
+                    </span>
+                </div>
+            </div>
+
+            <!-- Price Field -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Price</label>
+                <div class="col-sm-9">
+                    <input 
+                        type="number"
+                        class="form-control"
+                        placeholder="Product Price"
+
+                        ngModel
+                        name="productPrice"
+                        
+                        required
+                        min="0">
+
+                    <span 
+                        class="form-text text-danger"
+                        *ngIf="validPrice()"
+                        >
+                        Price must be 0 or bigger
+                    </span>
+                </div>
+            </div>
+
+            <!-- Stock Field -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Stock</label>
+                <div class="col-sm-9">
+                    <input 
+                        type="number"
+                        class="form-control"
+                        placeholder="Product Stock"
+
+                        customMinDirective
+                        [minValue]="0"
+                        
+                        ngModel
+                        name="productStock"
+                        required>
+                </div>
+            </div>
+
+            <!-- button -->
+            <div class="row">
+                <div class="col">
+                    <button 
+                        type="submit" 
+                        [disabled]="myForm.invalid"
+                        class="btn btn-primary float-end">
+                        Submit
+                    </button>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+
+        <span>Valid (required fields?)</span>
+        <pre> {{ myForm.valid }} </pre>
+        
+        <span>Pristine (any change in form element?)</span>
+        <pre> {{ myForm.pristine }} </pre>
+        
+        <span>Touched (did user 'touch' the form? )</span>
+        <pre> {{ myForm.touched }} </pre>
+        
+        <span>Value</span>
+        <pre> {{ myForm.value | json }} </pre>
+        
+    </div>
+</div>

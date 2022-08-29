@@ -1,0 +1,10 @@
+<h1>Angular Life Cycle</h1>
+<hr>
+
+
+<button (click)="display = !display">
+  {{ display ? 'Hide' : 'Display' }}
+</button>
+
+<app-page1 *ngIf="display"></app-page1>
+<!-- <app-page1></app-page1> -->
