@@ -7,6 +7,9 @@ require('dotenv').config();
 // database connection method
 const { dbConnection } = require('./database/database-config');
 
+// PRODUCTION
+const path = require('path');
+
 
 // create express app
 const app = express();
@@ -23,11 +26,15 @@ app.use( express.json() );
 // routes applying middleware
 app.use( '/api/auth', require('./routes/auth.routes'));
 
+// PRODUCTION
+app.get( '*', (req, res)=>{
+    res.sendFile( path.resolve( __dirname, './public/index.html' ) )
+} );
 
 
 // listen to a port
 const port = process.env.PORT;
-app.listen(4000, ()=> console.log(`Server running at port ${ port }`));
+app.listen(port, ()=> console.log(`Server running at port ${ port }`));
 
 /*
 npm i -g nodemon
