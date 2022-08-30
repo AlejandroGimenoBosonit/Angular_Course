@@ -35,6 +35,7 @@ const createUser = async(req=request, res=response) => {
             ok: true,
             uid: dbUser.id,
             name,
+            email,
             token
         })
 
@@ -50,7 +51,6 @@ const createUser = async(req=request, res=response) => {
 const authenticateUser = async (req=request, res=response) => {
 
     const { email, password } = req.body;
-
     try {
         
         const user = await User.findOne({email});
@@ -80,6 +80,7 @@ const authenticateUser = async (req=request, res=response) => {
             ok: true,
             uid: user.id,
             name: user.name,
+            email: user.email,
             token
         })
 
@@ -95,16 +96,21 @@ const authenticateUser = async (req=request, res=response) => {
 const tokenValidator = async(req=request, res=response) => {
     
     // read uid and name that has been declared in the middleware
-    const { uid, name } = req;
+    const { uid } = req;
+
+    const user = await User.findById( uid );
+
+
     
     // generate new jwt
-    const newToken = await generateJWT( uid, name ); 
+    const token = await generateJWT( uid, user.name ); 
 
     return res.json({
         ok: true,
         uid,
-        name,
-        newToken
+        name: user.name,
+        email:user.email,
+        token
     });
 };
 

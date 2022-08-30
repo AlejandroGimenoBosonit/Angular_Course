@@ -5,7 +5,7 @@ const validateFields = (req=request, res=response, next) => {
     
     // deal with express validations
     const errors = validationResult( req );
-    console.log(errors);
+    // console.log(errors);
     if(!errors.isEmpty()){
         return res.status(400).json({
             ok: false,
