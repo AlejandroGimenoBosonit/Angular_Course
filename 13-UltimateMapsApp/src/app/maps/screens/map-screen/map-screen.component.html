@@ -1,0 +1,21 @@
+
+
+
+<!-- Loading Component ( Only if isUserLocationReady )-->
+<app-loading *ngIf="!isUserLocationReady ; else mapReady" ></app-loading>
+
+
+
+<ng-template #mapReady>
+    <!-- Map view ( If not loading => isUserLocationReady === true ) -->
+    <app-map-view> </app-map-view>
+
+    <!-- Button -->
+    <app-btn-my-location></app-btn-my-location>
+    <!-- Search Bar -->
+    <app-search-bar></app-search-bar>
+</ng-template>
+
+
+<!-- Angular Logo -->
+<app-angular-logo></app-angular-logo>
