@@ -6,6 +6,8 @@ const cors = require('cors');
 require('dotenv').config();
 // database connection method
 const { dbConnection } = require('./database/database-config');
+// PRODUCTION: PATH
+const path = require('path');
 
 // PRODUCTION
 const path = require('path');
@@ -26,14 +28,6 @@ app.use( express.json() );
 // routes applying middleware
 app.use( '/api/auth', require('./routes/auth.routes'));
 
-// PRODUCTION
-app.get( '*', (req, res)=>{
-    res.sendFile( path.resolve( __dirname, './public/index.html' ) )
-} );
-
-
-// listen to a port
-const port = process.env.PORT;
 app.listen(port, ()=> console.log(`Server running at port ${ port }`));
 
 /*
