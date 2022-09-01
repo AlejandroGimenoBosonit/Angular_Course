@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { PlacesResponse, Feature } from '../interfaces/interfaces';
+import { PlacesResponse, Feature } from '../interfaces/places';
 import { PlacesAPIClient } from '../api';
 import { MapService } from './map.service';
 
@@ -54,8 +54,7 @@ export class PlacesService {
     
     // loading state starts
     this.isLoadingPlaces = true;
-    // TODO: eval when query is empty
-    console.log(this.useLocation.join(','));
+    // console.log(this.useLocation.join(','));
     
     this.pa
         .get<PlacesResponse>(`/${query}.json`, {
@@ -72,5 +71,9 @@ export class PlacesService {
           
           this.ms.createMarkersFromPlaces( this.places, this.useLocation! );
         });
+  }
+
+  deletePlaces() {
+    this.places = [];
   }
 }

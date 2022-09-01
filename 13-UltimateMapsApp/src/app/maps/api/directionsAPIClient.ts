@@ -1,4 +1,4 @@
-// CUSTOM CLIENT TO MAKE REQUEST TO THE MAPBOX API - PLACES
+// CUSTOM CLIENT TO MAKE REQUEST TO THE MAPBOX API - DIRECTIONS
 
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHandler, HttpParams } from '@angular/common/http';
@@ -9,29 +9,28 @@ import { environment } from '../../../environments/environment';
     providedIn: 'root'
 })
 
-export class PlacesAPIClient extends HttpClient {
+export class DirectionsAPIClient extends HttpClient {
     // base url
-    public baseUrl: string = "https://api.mapbox.com/geocoding/v5/mapbox.places";
+    public baseUrl: string = "https://api.mapbox.com/directions/v5/mapbox/driving";
 
     constructor( handler: HttpHandler ) {
         super(handler);
     }
 
-    public override get<T>(url: string, options: {
-        params?: HttpParams | {
-            [params: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
-        }
-    }) {
+    public override get<T>(url: string) {
+
         url = this.baseUrl + url;
         // console.log(url);
         
 
         return super.get<T>( url, {
             params: {
-                limit: 5,
+                alternatives: false,
+                geometries: 'geojson',
                 language: 'es',
-                access_token: environment.apiKey,
-                ...options.params
+                overview: 'simplified',
+                steps: true,
+                access_token: environment.apiKey
             }
         } );
     }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PlacesService } from '../../services/places.service';
+import { PlacesService } from '../../services';
 
 @Component({
   selector: 'app-search-bar',

@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import mapboxgl, { Marker, Popup } from 'mapbox-gl';
-import { PlacesService } from '../../services/places.service';
-import { MapService } from '../../services/map.service';
+import { PlacesService, MapService } from '../../services';
 
 @Component({
   selector: 'app-map-view',
