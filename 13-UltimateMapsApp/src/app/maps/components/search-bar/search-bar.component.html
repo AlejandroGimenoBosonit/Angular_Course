@@ -1,0 +1,13 @@
+<div class="search-container">
+    <input 
+        type="text"
+        class="form-control"
+        placeholder="Search place..."
+
+        #txtQuery
+        (keyup)="onQueryChanged(txtQuery.value)"
+    >
+
+    <!-- Search Results Component -->
+    <app-search-results></app-search-results>
+</div>
